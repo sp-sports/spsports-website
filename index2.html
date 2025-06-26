@@ -507,69 +507,73 @@
             height: 30px;
         }
 
-        /* --- BOOKING MODAL --- */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 2000;
-            display: none; /* Initially hidden */
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-container {
-            background: var(--light-color);
-            padding: 40px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-            transform: translateY(-50px);
-            opacity: 0;
-            transition: all 0.3s ease-out;
-        }
-        .modal-overlay.show .modal-container {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--dark-color);
-        }
-        .modal-container h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-family: var(--font-body);
-            font-size: 1rem;
-        }
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
+    /* --- BOOKING MODAL --- */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+        z-index: 2000;
+        display: none; /* Initially hidden */
+        align-items: center;
+        justify-content: center;
+    }
+    .modal-container {
+        background: var(--light-color);
+        padding: 30px 20px;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 400px;
+        position: relative;
+        transform: translateY(-50px);
+        opacity: 0;
+        transition: all 0.3s ease-out;
+    }
+    .modal-overlay.show .modal-container {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    .modal-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: none;
+        border: none;
+        font-size: 2rem;
+        cursor: pointer;
+        color: var(--dark-color);
+    }
+    .modal-container h2 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    .form-group label.required::after {
+        content: " *";
+        color: red;
+    }
+    .form-group input, .form-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-family: var(--font-body);
+        font-size: 1rem;
+    }
+    .form-group input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+    }
 
 
         /* --- FOOTER --- */
@@ -677,9 +681,10 @@
 
     <!-- ======== HEADER ======== -->
     <header class="main-header">
-        <div class="container">
-            <a href="#" class="logo nav-link" data-page="home">SP<span>SPORTS</span></a>
-            <nav class="main-nav">
+        <div class="container" style="display: flex; align-items: center; gap: 10px;">
+            <img src="logo.jpg" alt="SP Sports Logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+            <a href="#" class="logo nav-link" data-page="home" style="margin-left: 10px;">SP<span> Sports</span></a>
+            <nav class="main-nav" style="margin-left: auto;">
                 <a href="#" class="btn btn-secondary nav-link" data-page="bookings">BOOK NOW</a>
                 <a href="#" class="nav-link" data-page="about">About Us</a>
                 <a href="#footer" class="nav-link-scroll">Contact Us</a>
@@ -745,15 +750,17 @@
             <!-- Testimonials Section -->
             <section id="testimonials" class="section section-light">
                 <div class="container">
-                    <h2 class="section-title scroll-animate">What <span>Parents Say</span></h2>
-                    <div class="testimonial-carousel-container scroll-animate">
-                        <div class="testimonial-carousel-wrapper">
-                            <!-- Testimonials will be injected by JS -->
-                        </div>
-                        <div class="testimonial-nav">
-                            <!-- Dots will be injected by JS -->
-                        </div>
-                    </div>
+        <h2 class="section-title scroll-animate">What <span>People Say</span></h2>
+        <div class="testimonial-carousel-container scroll-animate" style="position: relative;">
+            <button class="carousel-arrow prev" id="testimonial-prev" style="position: absolute; top: 50%; left: 0; transform: translateY(-50%); z-index: 10;">&#10094;</button>
+            <button class="carousel-arrow next" id="testimonial-next" style="position: absolute; top: 50%; right: 0; transform: translateY(-50%); z-index: 10;">&#10095;</button>
+            <div class="testimonial-carousel-wrapper">
+                <!-- Testimonials will be injected by JS -->
+            </div>
+            <div class="testimonial-nav">
+                <!-- Dots will be injected by JS -->
+            </div>
+        </div>
                 </div>
             </section>
         </section>
@@ -863,10 +870,10 @@
                     </div>
 
                     <div class="booking-action scroll-animate">
-                        <button class="btn" id="open-booking-modal">
-                           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.75 13.96c.25.13.41.39.41.67 0 .42-.33.75-.75.75-.13 0-.26-.03-.38-.09a8.851 8.851 0 0 1-3.6-2.01 8.851 8.851 0 0 1-2.01-3.6c-.06-.12-.09-.25-.09-.38 0-.42.33-.75.75-.75.28 0 .54.16.67.41.31.62.73 1.2 1.21 1.72.52.52 1.1 1.01 1.72 1.21M12 2 a10 10 0 0 0 -10 10c0 5.52 4.48 10 10 10 1.39 0 2.74-.28 3.96-.81l1.83 1.83c.26.26.62.41.99.41.83 0 1.5-.67 1.5-1.5 0-.37-.15-.73-.41-.99l-1.83-1.83c.53-1.22.81-2.57.81-3.96 a10 10 0 0 0 -10-10Z"></path></svg>
-                            Book via WhatsApp
-                        </button>
+                    <button class="btn" id="open-booking-modal">
+                       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.75 13.96c.25.13.41.39.41.67 0 .42-.33.75-.75.75-.13 0-.26-.03-.38-.09a8.851 8.851 0 0 1-3.6-2.01 8.851 8.851 0 0 1-2.01-3.6c-.06-.12-.09-.25-.09-.38 0-.42.33-.75.75-.75.28 0 .54.16.67.41.31.62.73 1.2 1.21 1.72.52.52 1.1 1.01 1.72 1.21M12 2 a10 10 0 0 0 -10 10c0 5.52 4.48 10 10 10 1.39 0 2.74-.28 3.96-.81l1.83 1.83c.26.26.62.41.99.41.83 0 1.5-.67 1.5-1.5 0-.37-.15-.73-.41-.99l-1.83-1.83c.53-1.22.81-2.57.81-3.96 a10 10 0 0 0 -10-10Z"></path></svg>
+                    Book via WhatsApp
+                </button>
                     </div>
                 </div>
             </section>
@@ -885,22 +892,40 @@
                 <a href="#" class="footer-logo nav-link" data-page="home">SP<span>SPORTS</span></a>
                 <p>Nurturing the next generation of athletes through fun, fitness, and fundamentals.</p>
             </div>
-            <div class="footer-contact">
-                <h4>Contact Us</h4>
-                <p>
-                    <a href="mailto:sample@gmail.com">Email: sample@gmail.com</a><br>
-                    <a href="tel:9876543210">Phone: 9876543210</a>
-                </p>
-            </div>
-            <div class="footer-address">
-                <h4>Our Address</h4>
-                <p>
-                    Sportybeans Porur<br>
-                    Plot A & B, Annai Velankanni Nagar Phase II,<br>
-                    4th Ave, Chennai 600125, IN
-                </p>
-            </div>
+        <div class="footer-contact">
+            <h4>Contact Us</h4>
+            <p>
+                <a href="mailto:sample@gmail.com">Email: sample@gmail.com</a><br>
+                <a href="tel:9876543210">Phone: 9876543210</a>
+            </p>
         </div>
+        <div class="footer-address">
+            <h4>Our Address</h4>
+            <p>
+                Sportybeans Porur<br>
+                Plot A & B, Annai Velankanni Nagar Phase II,<br>
+                4th Ave, Chennai 600125, IN
+            </p>
+        </div>
+        <div class="footer-follow">
+            <h4>Follow Us</h4>
+            <p>
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a> |
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a> |
+                <a href="https://threads.net" target="_blank" rel="noopener noreferrer">Threads</a> |
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
+            </p>
+        </div>
+        <div class="footer-quick-links">
+            <h4>Quick Links</h4>
+            <p>
+                <a href="#" class="nav-link" data-page="home">Home</a><br>
+                <a href="#" class="nav-link" data-page="about">About Us</a><br>
+                <a href="#" class="nav-link" data-page="bookings">Book Now</a><br>
+                <a href="#footer" class="nav-link-scroll">Contact Us</a>
+            </p>
+        </div>
+    </div>
         <div class="footer-bottom">
             <p>© 2023 SP SPORTS ACADEMY. All Rights Reserved.</p>
         </div>
@@ -913,19 +938,19 @@
             <h2>Booking Form</h2>
             <form id="whatsapp-form">
                 <div class="form-group">
-                    <label for="name">Name</label>
+                    <label for="name" class="required">Name</label>
                     <input type="text" id="name" name="name" required>
                 </div>
                 <div class="form-group">
-                    <label for="phone">Phone</label>
+                    <label for="phone" class="required">Phone</label>
                     <input type="tel" id="phone" name="phone" required>
                 </div>
                  <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="email" class="required">Email</label>
                     <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="gender">Gender</label>
+                    <label for="gender" class="required">Gender</label>
                     <select id="gender" name="gender" required>
                         <option value="">--Please choose an option--</option>
                         <option value="Male">Male</option>
@@ -934,12 +959,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="date">Date</label>
+                    <label for="date" class="required">Date</label>
                     <input type="date" id="date" name="date" required>
-                </div>
-                <div class="form-group">
-                    <label for="time">Desired Time Slot</label>
-                    <input type="time" id="time" name="time" required>
                 </div>
                 <button type="submit" class="btn">Send via WhatsApp</button>
             </form>
@@ -960,7 +981,7 @@
             'https://images.pexels.com/photos/863963/pexels-photo-863963.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
         ];
         
-        const testimonials = [
+        /*const testimonials = [
             {
                 quote: "My son absolutely loves SP Sports! The coaches are fantastic, and he has learned so much while having a blast. Highly recommended!",
                 author: "Priya S.",
@@ -980,8 +1001,8 @@
                 quote: "From the multisport program to the friendly staff, everything about SP Sports Academy is designed with kids in mind. It's a fantastic place!",
                 author: "Anjali K.",
                 title: "Parent"
-            }
-        ];
+        }
+    ]*/;
         
         // --- PAGE NAVIGATION --- (*** THIS IS THE CORRECTED SECTION ***)
         const navLinks = document.querySelectorAll('.nav-link');
@@ -1099,12 +1120,62 @@
         const testimonialNav = document.querySelector('.testimonial-nav');
         let testimonialCurrentIndex = 0;
 
+        const testimonials = [
+            {
+                quote: "My son absolutely loves SP Sports! The coaches are fantastic, and he has learned so much while having a blast. Highly recommended!",
+                author: "Priya S.",
+                title: "Parent",
+                rating: 5
+            },
+            {
+                quote: "A clean, safe, and incredibly fun environment for kids to burn off energy and learn new skills. We've seen a huge boost in our daughter's confidence.",
+                author: "Rajeev M.",
+                title: "Parent",
+                rating: 5
+            },
+            {
+                quote: "The basketball court facilities are top-notch. It's our go-to place for practice sessions. The booking process is simple and efficient.",
+                author: "Coach Anand",
+                title: "Basketball Coach",
+                rating: 5
+            },
+            {
+                quote: "From the multisport program to the friendly staff, everything about SP Sports Academy is designed with kids in mind. It's a fantastic place!",
+                author: "Anjali K.",
+                title: "Parent",
+                rating: 5
+            },
+            {
+                quote: "Playing here has improved my skills tremendously. The synthetic court surface is amazing and the coaches are very supportive.",
+                author: "Arjun Patel",
+                title: "Basketball Player",
+                rating: 5
+            },
+            {
+                quote: "I love the premium facilities and the friendly environment. It's the perfect place to train and have fun.",
+                author: "Sneha Rao",
+                title: "Basketball Player",
+                rating: 5
+            },
+            {
+                quote: "The court is well-maintained and the training sessions are very professional. Highly recommend SP Sports Academy!",
+                author: "Vikram Singh",
+                title: "Basketball Player",
+                rating: 5
+            }
+        ];
+
         if (testimonialWrapper) {
             testimonials.forEach((t, index) => {
+                let stars = '';
+                for(let i=0; i<t.rating; i++) {
+                    stars += '⭐';
+                }
                 testimonialWrapper.innerHTML += `
                     <div class="testimonial-slide">
                         <div class="testimonial-card">
                             <p>"${t.quote}"</p>
+                            <div>${stars}</div>
                             <div class="testimonial-author">${t.author} <span>- ${t.title}</span></div>
                         </div>
                     </div>`;
@@ -1131,6 +1202,21 @@
                 testimonialCurrentIndex = (testimonialCurrentIndex + 1) % testimonials.length;
                 updateTestimonialCarousel();
             }, 5000);
+
+            // Add arrow button functionality
+            const prevBtn = document.getElementById('testimonial-prev');
+            const nextBtn = document.getElementById('testimonial-next');
+
+            if(prevBtn && nextBtn) {
+                prevBtn.addEventListener('click', () => {
+                    testimonialCurrentIndex = (testimonialCurrentIndex - 1 + testimonials.length) % testimonials.length;
+                    updateTestimonialCarousel();
+                });
+                nextBtn.addEventListener('click', () => {
+                    testimonialCurrentIndex = (testimonialCurrentIndex + 1) % testimonials.length;
+                    updateTestimonialCarousel();
+                });
+            }
         }
 
         // --- BOOKING MODAL & FORM ---
@@ -1160,10 +1246,9 @@
                 const name = document.getElementById('name').value;
                 const phone = document.getElementById('phone').value;
                 const date = document.getElementById('date').value;
-                const time = document.getElementById('time').value;
-                const whatsappNumber = '+919791011459';
+                const whatsappNumber = '+917358085526';
                 
-                const message = `Hi, I am ${name}, I'd like to book the basketball court on ${date} at ${time}. My contact number is ${phone}.`;
+                const message = `Hi, I am ${name}, I'd like to book the basketball court on ${date}. My contact number is ${phone}.`;
                 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
                 
                 window.open(whatsappUrl, '_blank');
