@@ -5,685 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SP SPORTS ACADEMY</title>
     
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Bangers&display=swap" rel="stylesheet">
 
-    <style>
-        /* CSS RESET & GLOBAL STYLES */
-        :root {
-            --primary-color: #FF6700; /* Energetic Orange */
-            --secondary-color: #0077B6; /* Deep Sky Blue */
-            --accent-color: #FDE74C; /* Sunny Yellow */
-            --dark-color: #2C3E50; /* Midnight Blue */
-            --light-color: #FFFFFF;
-            --gray-color: #f4f4f4;
-            --font-display: 'Bangers', cursive;
-            --font-body: 'Poppins', sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-body);
-            color: var(--dark-color);
-            line-height: 1.6;
-            background-color: var(--light-color);
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-display);
-            letter-spacing: 2px;
-            color: var(--secondary-color);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 0 20px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            background: var(--primary-color);
-            color: var(--light-color);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid var(--primary-color);
-            font-size: 1rem;
-        }
-
-        .btn:hover {
-            background: transparent;
-            color: var(--primary-color);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .btn-secondary {
-            background: var(--secondary-color);
-            border-color: var(--secondary-color);
-        }
-        
-        .btn-secondary:hover {
-            background: transparent;
-            color: var(--secondary-color);
-        }
-
-        /* PAGE NAVIGATION & STRUCTURE */
-        .page {
-            display: none;
-        }
-        .page.active {
-            display: block;
-        }
-
-        /* --- HEADER --- */
-        .main-header {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 15px 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .main-header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-        .logo span { color: var(--secondary-color); }
-
-        .main-nav {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        .main-nav a {
-            text-decoration: none;
-            color: var(--dark-color);
-            font-weight: 600;
-            padding: 5px 10px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .main-nav a:hover, .main-nav a.active-link {
-            background: var(--primary-color);
-            color: var(--light-color);
-        }
-        
-        .main-nav .btn {
-            padding: 8px 20px;
-        }
-
-        /* --- HERO SECTION (Landing Page) --- */
-        #hero {
-            height: 100vh;
-            background: linear-gradient(to right, rgba(0, 119, 182, 0.1), rgba(255, 103, 0, 0.1));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            padding-top: 80px; /* Header offset */
-        }
-        
-        #hero-content {
-            z-index: 2;
-        }
-
-        #hero h1 {
-            font-size: 6rem;
-            color: var(--secondary-color);
-            line-height: 1.1;
-            margin-bottom: 10px;
-        }
-        
-        #hero h1 span {
-            color: var(--primary-color);
-        }
-
-        #hero p {
-            font-size: 1.5rem;
-            max-width: 600px;
-            margin: 0 auto 30px;
-            font-weight: 400;
-        }
-
-        /* Floating Basketballs Animation */
-        .basketballs {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .ball {
-            position: absolute;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="%23FF6700"/><path d="M50,0 A50,50 0 0,1 50,100" stroke="black" stroke-width="2" fill="none"/><path d="M0,50 A50,50 0 0,1 100,50" stroke="black" stroke-width="2" fill="none"/><path d="M20,20 A40,40 0 0,1 80,80" stroke="black" stroke-width="2" fill="none"/><path d="M20,80 A40,40 0 0,0 80,20" stroke="black" stroke-width="2" fill="none"/></svg>');
-            background-size: cover;
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
-        }
-
-        /* --- GENERAL SECTION STYLING --- */
-        .section {
-            padding: 80px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 3.5rem;
-            margin-bottom: 50px;
-        }
-        
-        .section-title span { color: var(--primary-color); }
-        
-        .section-light { background-color: var(--light-color); }
-        .section-dark { background-color: var(--gray-color); }
-
-        /* --- GALLERY SECTION --- */
-        .gallery-container {
-            position: relative;
-            overflow: hidden;
-            padding: 0 50px; /* Space for arrows */
-        }
-        .gallery-wrapper {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-        .gallery-slide {
-            flex: 0 0 50%; /* Show 2 images at a time */
-            padding: 10px;
-        }
-        .gallery-slide img {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .carousel-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--light-color);
-            color: var(--primary-color);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 2rem;
-            cursor: pointer;
-            z-index: 10;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .prev { left: 0; }
-        .next { right: 0; }
-
-        /* --- WHY CHOOSE US SECTION --- */
-        .why-choose-us-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        .why-card {
-            background: var(--light-color);
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-        .why-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-        .why-card-icon {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-        .why-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-        }
-        .learn-more-container { text-align: center; }
-
-        /* --- TESTIMONIALS SECTION --- */
-        #testimonials { position: relative; }
-        .testimonial-carousel-wrapper {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-        .testimonial-slide {
-            flex: 0 0 100%;
-            padding: 20px;
-        }
-        .testimonial-card {
-            background: var(--light-color);
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            max-width: 700px;
-            margin: 0 auto;
-            border-left: 5px solid var(--primary-color);
-        }
-        .testimonial-card p {
-            font-style: italic;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-        }
-        .testimonial-author {
-            font-weight: bold;
-            color: var(--secondary-color);
-        }
-        .testimonial-author span {
-            font-weight: normal;
-            color: var(--dark-color);
-            display: block;
-            font-style: normal;
-        }
-        .testimonial-nav {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .dot {
-            cursor: pointer;
-            height: 15px;
-            width: 15px;
-            margin: 0 5px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block;
-            transition: background-color 0.3s ease;
-        }
-        .dot.active {
-            background-color: var(--primary-color);
-        }
-
-        /* --- ABOUT US PAGE --- */
-        #page-about { padding-top: 100px; }
-        .about-intro {
-            display: flex;
-            gap: 40px;
-            align-items: center;
-            margin-bottom: 80px;
-        }
-        .about-intro-text { flex: 1; }
-        .about-intro-text h1 { font-size: 4rem; }
-        .about-intro-image {
-            flex: 1;
-            max-width: 500px;
-        }
-        .about-intro-image img {
-            width: 100%;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        
-        .programs-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-        
-        details {
-            border: 2px solid var(--gray-color);
-            border-radius: 10px;
-            padding: 20px;
-            transition: all 0.3s ease;
-        }
-        
-        details[open] {
-            border-color: var(--secondary-color);
-        }
-        
-        summary {
-            font-size: 1.8rem;
-            font-family: var(--font-display);
-            letter-spacing: 1px;
-            color: var(--secondary-color);
-            cursor: pointer;
-            list-style: none; /* Remove default marker */
-        }
-        
-        summary::-webkit-details-marker { display: none; } /* Chrome/Safari */
-        summary::marker { display: none; } /* Firefox */
-        
-        summary:after {
-            content: '+';
-            float: right;
-            font-size: 2rem;
-            font-family: var(--font-body);
-            font-weight: bold;
-            color: var(--primary-color);
-            transition: transform 0.3s ease;
-        }
-        
-        details[open] summary:after {
-            transform: rotate(45deg);
-        }
-
-        .details-content {
-            padding-top: 20px;
-            margin-top: 20px;
-            border-top: 1px solid var(--gray-color);
-        }
-        .details-content p { margin-bottom: 20px; }
-        
-        .centre-card {
-            background: var(--light-color);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        
-        .map-container {
-            position: relative;
-            overflow: hidden;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        .map-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        /* --- BOOKINGS PAGE --- */
-        #page-bookings { padding-top: 80px; }
-        .bookings-hero {
-            height: 50vh;
-            background: url('https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=2090&auto=format&fit=crop') no-repeat center center/cover;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .bookings-hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-        }
-        .bookings-hero h1 {
-            color: var(--light-color);
-            font-size: 5rem;
-            z-index: 2;
-        }
-
-        .booking-details-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-        .detail-card {
-            background-color: var(--gray-color);
-            padding: 30px;
-            border-radius: 15px;
-        }
-        .detail-card h3 {
-            font-size: 2rem;
-            border-bottom: 3px solid var(--primary-color);
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-        .detail-card ul {
-            list-style: none;
-        }
-        .detail-card li {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-        .detail-card li strong {
-            color: var(--secondary-color);
-            min-width: 100px;
-        }
-        .detail-card li svg {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-            fill: var(--primary-color);
-        }
-
-        .booking-action {
-            text-align: center;
-            padding: 60px 0;
-        }
-        .booking-action .btn {
-            font-size: 1.5rem;
-            padding: 20px 40px;
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .booking-action .btn svg {
-            width: 30px;
-            height: 30px;
-        }
-
-        /* --- BOOKING MODAL --- */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 2000;
-            display: none; /* Initially hidden */
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-container {
-            background: var(--light-color);
-            padding: 40px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-            transform: translateY(-50px);
-            opacity: 0;
-            transition: all 0.3s ease-out;
-        }
-        .modal-overlay.show .modal-container {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--dark-color);
-        }
-        .modal-container h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-family: var(--font-body);
-            font-size: 1rem;
-        }
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-
-        /* --- FOOTER --- */
-        footer {
-            background-color: var(--dark-color);
-            color: var(--light-color);
-            padding: 60px 0;
-            position: relative;
-        }
-        .footer-wave {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            overflow: hidden;
-            line-height: 0;
-            transform: rotate(180deg);
-        }
-        .footer-wave svg {
-            position: relative;
-            display: block;
-            width: calc(100% + 1.3px);
-            height: 80px;
-        }
-        .footer-wave .shape-fill {
-            fill: var(--light-color);
-        }
-        .section-dark + footer .footer-wave .shape-fill {
-             fill: var(--gray-color);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            text-align: center;
-        }
-        .footer-content h4 {
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-        .footer-content p, .footer-content a {
-            color: #ccc;
-            text-decoration: none;
-            line-height: 1.8;
-        }
-        .footer-content a:hover {
-            color: var(--light-color);
-        }
-        .footer-logo {
-            font-family: var(--font-display);
-            font-size: 2.5rem;
-            color: var(--primary-color);
-        }
-        .footer-logo span {
-            color: var(--light-color);
-        }
-        .footer-bottom {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #444;
-            font-size: 0.9rem;
-            color: #aaa;
-        }
-        
-        /* SCROLL ANIMATIONS */
-        .scroll-animate {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        
-        .scroll-animate.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* RESPONSIVE DESIGN */
-        @media (max-width: 768px) {
-            .main-header .container {
-                flex-direction: column;
-                gap: 10px;
-            }
-            .main-nav {
-                width: 100%;
-                justify-content: space-around;
-            }
-            .main-nav .btn { display: none; } /* Hide BOOK NOW in nav on mobile */
-            
-            #hero h1 { font-size: 4rem; }
-            #hero p { font-size: 1.2rem; }
-            
-            .gallery-slide { flex: 0 0 100%; } /* 1 image at a time on mobile */
-            
-            .about-intro { flex-direction: column; }
-            .programs-grid { grid-template-columns: 1fr; }
-            
-            .bookings-hero h1 { font-size: 3rem; }
-        }
-    </style>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <!-- Your Custom CSS (Must be AFTER Bootstrap) -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- ======== HEADER ======== -->
-    <header class="main-header">
+    <!-- ======== HEADER (Bootstrap Navbar) ======== -->
+    <header class="main-header navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a href="#" class="logo nav-link" data-page="home">SP<span>SPORTS</span></a>
-            <nav class="main-nav">
-                <a href="#" class="btn btn-secondary nav-link" data-page="bookings">BOOK NOW</a>
-                <a href="#" class="nav-link" data-page="about">About Us</a>
-                <a href="#footer" class="nav-link-scroll">Contact Us</a>
-            </nav>
+            <a href="#" class="navbar-brand logo nav-link d-flex align-items-center" data-page="home">
+                <img src="logo.jpg" alt="SP Sports Logo" class="me-2" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                SP<span> Sports</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <nav class="main-nav navbar-nav ms-auto align-items-lg-center">
+                    <a href="#" class="nav-item nav-link" data-page="about">About Us</a>
+                    <a href="#footer" class="nav-item nav-link nav-link-scroll">Contact Us</a>
+                    <a href="#" class="nav-item btn btn-secondary ms-lg-3 nav-link" data-page="bookings">BOOK NOW</a>
+                </nav>
+            </div>
         </div>
     </header>
 
@@ -692,7 +43,7 @@
         <section id="page-home" class="page active">
 
             <!-- Hero Section -->
-            <section id="hero">
+            <section id="hero" class="d-flex align-items-center justify-content-center text-center">
                 <div class="basketballs"></div>
                 <div id="hero-content" class="container">
                     <h1>Unleash Your <span>Potential</span></h1>
@@ -706,8 +57,9 @@
                 <div class="container">
                     <h2 class="section-title scroll-animate">Our <span>Gallery</span></h2>
                     <div class="gallery-container scroll-animate">
+                        <!-- Using Bootstrap Grid for responsiveness within the custom slider -->
                         <div class="gallery-wrapper">
-                            <!-- Slides will be injected by JS -->
+                            <!-- Slides will be injected by JS into a row -->
                         </div>
                         <button class="carousel-arrow prev" id="gallery-prev"><</button>
                         <button class="carousel-arrow next" id="gallery-next">></button>
@@ -719,40 +71,55 @@
             <section id="why-choose-us" class="section section-dark">
                 <div class="container">
                     <h2 class="section-title scroll-animate">Why <span>Choose Us?</span></h2>
-                    <div class="why-choose-us-grid">
-                        <div class="why-card scroll-animate">
-                            <div class="why-card-icon">⭐</div>
-                            <h3>Expert Coaching</h3>
-                            <p>Our certified coaches are passionate about developing young talent in a supportive environment.</p>
+                    <!-- Using Bootstrap Grid -->
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-lg-4 col-md-6 scroll-animate">
+                            <div class="why-card">
+                                <div class="why-card-icon">⭐</div>
+                                <h3>Expert Coaching</h3>
+                                <p>Our certified coaches are passionate about developing young talent in a supportive environment.</p>
+                            </div>
                         </div>
-                        <div class="why-card scroll-animate">
-                            <div class="why-card-icon">🏆</div>
-                            <h3>Fun-Based Learning</h3>
-                            <p>We believe sports should be enjoyable, focusing on games and activities kids love.</p>
+                        <div class="col-lg-4 col-md-6 scroll-animate">
+                            <div class="why-card">
+                                <div class="why-card-icon">🏆</div>
+                                <h3>Fun-Based Learning</h3>
+                                <p>We believe sports should be enjoyable, focusing on games and activities kids love.</p>
+                            </div>
                         </div>
-                        <div class="why-card scroll-animate">
-                            <div class="why-card-icon">🛡️</div>
-                            <h3>Safe Environment</h3>
-                            <p>Top-notch facilities and a commitment to safety ensure your child can play with peace of mind.</p>
+                        <div class="col-lg-4 col-md-6 scroll-animate">
+                            <div class="why-card">
+                                <div class="why-card-icon">🛡️</div>
+                                <h3>Safe Environment</h3>
+                                <p>Top-notch facilities and a commitment to safety ensure your child can play with peace of mind.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="learn-more-container scroll-animate">
+                    <div class="learn-more-container mt-5 scroll-animate">
                         <a href="#" class="btn btn-secondary nav-link" data-page="about">Learn More</a>
                     </div>
                 </div>
             </section>
 
-            <!-- Testimonials Section -->
+            <!-- Testimonials Section (Using Bootstrap Carousel) -->
             <section id="testimonials" class="section section-light">
                 <div class="container">
-                    <h2 class="section-title scroll-animate">What <span>Parents Say</span></h2>
-                    <div class="testimonial-carousel-container scroll-animate">
-                        <div class="testimonial-carousel-wrapper">
-                            <!-- Testimonials will be injected by JS -->
+                    <h2 class="section-title scroll-animate">What <span>People Say</span></h2>
+                    <div id="testimonialCarousel" class="carousel slide scroll-animate" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <!-- Indicators injected by JS -->
                         </div>
-                        <div class="testimonial-nav">
-                            <!-- Dots will be injected by JS -->
+                        <div class="carousel-inner">
+                            <!-- Slides injected by JS -->
                         </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
                 </div>
             </section>
@@ -760,33 +127,35 @@
 
         <!-- ======== ABOUT US PAGE ======== -->
         <section id="page-about" class="page">
-            <div class="container">
-                <div class="about-intro">
-                    <div class="about-intro-text scroll-animate">
+            <div class="container pt-5">
+                <!-- Using Bootstrap Grid -->
+                <div class="row align-items-center about-intro">
+                    <div class="col-lg-6 about-intro-text scroll-animate">
                         <h1>About <span>SP Sports</span></h1>
-                        <p>Welcome to SP Sports Academy! We are a premier destination for youth sports, offering a state-of-the-art basketball court and a dynamic multi-sport fitness center for kids. Our mission is to foster a love for physical activity, build confidence, and teach valuable life skills like teamwork and discipline in a fun, energetic, and safe setting. Join our family and watch your little champion grow!</p>
+                        <p>Welcome to SP Sports Academy! We are a premier destination for youth sports... Join our family and watch your little champion grow!</p>
                     </div>
-                    <div class="about-intro-image scroll-animate">
-                        <img src="https://images.pexels.com/photos/863988/pexels-photo-863988.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Kids playing sports">
+                    <div class="col-lg-6 about-intro-image scroll-animate">
+                        <img src="https://images.pexels.com/photos/863988/pexels-photo-863988.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="img-fluid rounded-3 shadow-lg" alt="Kids playing sports">
                     </div>
                 </div>
 
                 <section class="section">
                     <h2 class="section-title scroll-animate">Our <span>Programs</span></h2>
-                    <div class="programs-grid">
-                        <div class="scroll-animate">
+                     <!-- Using Bootstrap Grid -->
+                    <div class="row g-4">
+                        <div class="col-md-6 scroll-animate">
                             <details>
                                 <summary>Multisport Fitness</summary>
                                 <div class="details-content">
-                                    <p>A whirlwind of fun! Our multisport program introduces kids to a variety of sports in an engaging way. We focus on developing fundamental motor skills, coordination, and agility through exciting games and activities. It's the perfect way to build a healthy, active lifestyle from a young age!</p>
+                                    <p>A whirlwind of fun! Our multisport program introduces kids to a variety of sports...</p>
                                 </div>
                             </details>
                         </div>
-                        <div class="scroll-animate">
+                        <div class="col-md-6 scroll-animate">
                             <details>
                                 <summary>Basketball Court Rental</summary>
                                 <div class="details-content">
-                                    <p>Our professional-grade basketball court is available for private rentals. Perfect for team practices, friendly matches, or just shooting some hoops. The court is well-maintained with excellent lighting and amenities.</p>
+                                    <p>Our professional-grade basketball court is available for private rentals...</p>
                                     <a href="#" class="btn nav-link" data-page="bookings">Book The Court</a>
                                 </div>
                             </details>
@@ -795,21 +164,20 @@
                 </section>
                 
                 <section class="section">
-                    <div class="centres-grid">
-                       <div class="scroll-animate">
-                            <h2 class="section-title">Our <span>Centre</span></h2>
-                            <div class="centre-card">
-                                <h3>Porur, Chennai</h3>
-                                <p>Our flagship centre in Porur is a vibrant hub of activity! Equipped with modern facilities and a welcoming atmosphere, it's the ideal place for kids to explore their athletic potential. We are conveniently located with ample parking space.</p>
-                            </div>
+                    <div class="scroll-animate">
+                        <h2 class="section-title">Our <span>Centre</span></h2>
+                        <div class="centre-card">
+                            <h3>Porur, Chennai</h3>
+                            <p>Our flagship centre in Porur is a vibrant hub of activity! Equipped with modern facilities and a welcoming atmosphere, it's the ideal place for kids to explore their athletic potential. We are conveniently located with ample parking space.</p>
                         </div>
                     </div>
                 </section>
 
                 <section class="section">
                     <h2 class="section-title scroll-animate">Where to <span>Find Us</span></h2>
-                    <div class="map-container scroll-animate">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.993433602159!2d80.1585736758688!3d13.036017313627236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52611cc5651f89%3A0x86733568953cdc73!2sPlot%20A%20%26%20B%2C%20Annai%20Velankanni%20Nagar%20Phase%20II%2C%204th%20Ave%2C%20Mugalivakkam%2C%20Chennai%2C%20Tamil%20Nadu%20600125!5e0!3m2!1sen!2sin!4v1701072979266!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <!-- Using Bootstrap's ratio helper for responsive iframe -->
+                    <div class="ratio ratio-16x9 scroll-animate rounded-3 shadow-lg">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.993433602159!2d80.1585736758688!3d13.036017313627236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52611cc5651f89%3A0x86733568953cdc73!2sPlot%20A%20%26%20B%2C%20Annai%20Velankanni%20Nagar%20Phase%20II%2C%204th%20Ave%2C%20Mugalivakkam%2C%20Chennai%2C%20Tamil%20Nadu%20600125!5e0!3m2!1sen!2sin!4v1701072979266!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </section>
             </div>
@@ -824,48 +192,32 @@
             <section class="section">
                 <div class="container">
                     <h2 class="section-title scroll-animate">Court <span>Details</span></h2>
-                    <div class="booking-details-grid">
-                        <div class="detail-card scroll-animate">
-                            <h3>Information</h3>
-                            <ul>
-                                <li><strong>Name:</strong> SP Sports Arena</li>
-                                <li><strong>Venue:</strong> Porur Centre</li>
-                                <li><strong>Address:</strong> Annai Velankanni Nagar, Chennai</li>
-                                <li><strong>Timings:</strong> 6 AM to 10 PM Daily</li>
-                            </ul>
+                     <!-- Using Bootstrap Grid -->
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-lg-4 col-md-6 scroll-animate">
+                            <div class="detail-card h-100">
+                                <h3>Information</h3>
+                                <ul>...</ul>
+                            </div>
                         </div>
-                        <div class="detail-card scroll-animate">
-                            <h3>Amenities</h3>
-                             <ul>
-                                <li>
-                                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path></svg>
-                                    Parking Available
-                                </li>
-                                <li>
-                                    <svg viewBox="0 0 24 24"><path d="M20 18h-4V6h4m0 14v-2h-4v2h4m-6-14v2H6v10H4v2h2v-2h6V6H8V4h6M8 8v6h4V8H8Z"></path></svg>
-                                    Changing Rooms
-                                </li>
-                                <li>
-                                    <svg viewBox="0 0 24 24"><path d="M12,18.5A1.5,1.5 0 0,1 10.5,17A1.5,1.5 0 0,1 12,15.5A1.5,1.5 0 0,1 13.5,17A1.5,1.5 0 0,1 12,18.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z"></path></svg>
-                                    Drinking Water
-                                </li>
-                            </ul>
+                        <div class="col-lg-4 col-md-6 scroll-animate">
+                            <div class="detail-card h-100">
+                                <h3>Amenities</h3>
+                                <ul>...</ul>
+                            </div>
                         </div>
-                         <div class="detail-card scroll-animate">
-                            <h3>Training Offered</h3>
-                            <ul>
-                                <li>Beginner & Advanced Coaching</li>
-                                <li>Team Practice Sessions</li>
-                                <li>1-on-1 Personal Training</li>
-                                <li>Kids Fitness Programs</li>
-                            </ul>
+                         <div class="col-lg-4 col-md-6 scroll-animate">
+                             <div class="detail-card h-100">
+                                <h3>Training Offered</h3>
+                                <ul>...</ul>
+                            </div>
                         </div>
                     </div>
-
                     <div class="booking-action scroll-animate">
-                        <button class="btn" id="open-booking-modal">
-                           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.75 13.96c.25.13.41.39.41.67 0 .42-.33.75-.75.75-.13 0-.26-.03-.38-.09a8.851 8.851 0 0 1-3.6-2.01 8.851 8.851 0 0 1-2.01-3.6c-.06-.12-.09-.25-.09-.38 0-.42.33-.75.75-.75.28 0 .54.16.67.41.31.62.73 1.2 1.21 1.72.52.52 1.1 1.01 1.72 1.21M12 2 a10 10 0 0 0 -10 10c0 5.52 4.48 10 10 10 1.39 0 2.74-.28 3.96-.81l1.83 1.83c.26.26.62.41.99.41.83 0 1.5-.67 1.5-1.5 0-.37-.15-.73-.41-.99l-1.83-1.83c.53-1.22.81-2.57.81-3.96 a10 10 0 0 0 -10-10Z"></path></svg>
-                            Book via WhatsApp
+                        <!-- Button triggers Bootstrap Modal -->
+                        <button class="btn" data-bs-toggle="modal" data-bs-target="#bookingModal">
+                           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.75 13.96..."></path></svg>
+                           Book via WhatsApp
                         </button>
                     </div>
                 </div>
@@ -877,327 +229,90 @@
     <footer id="footer">
         <div class="footer-wave">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,23.5V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+                <path d="M321.39,56.44c58-10.79...Z" class="shape-fill"></path>
             </svg>
         </div>
-        <div class="container footer-content">
-            <div class="footer-about">
-                <a href="#" class="footer-logo nav-link" data-page="home">SP<span>SPORTS</span></a>
-                <p>Nurturing the next generation of athletes through fun, fitness, and fundamentals.</p>
+        <div class="container">
+            <!-- Using Bootstrap Grid -->
+            <div class="row footer-content text-center text-md-start gy-4">
+                <div class="col-lg-4 col-md-12 footer-about">
+                    <a href="#" class="footer-logo nav-link" data-page="home">SP<span>SPORTS</span></a>
+                    <p>Nurturing the next generation of athletes through fun, fitness, and fundamentals.</p>
+                </div>
+                <div class="col-lg-2 col-md-4 footer-contact">
+                    <h4>Contact Us</h4>
+                    <p>
+                        <a href="mailto:sample@gmail.com">Email: sample@gmail.com</a><br>
+                        <a href="tel:9876543210">Phone: 9876543210</a>
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-4 footer-address">
+                    <h4>Our Address</h4>
+                    <p>Sportybeans Porur<br>Plot A & B, Annai Velankanni Nagar Phase II,<br>4th Ave, Chennai 600125, IN</p>
+                </div>
+                <div class="col-lg-3 col-md-4 footer-quick-links">
+                    <h4>Quick Links</h4>
+                    <p>
+                        <a href="#" class="nav-link" data-page="home">Home</a><br>
+                        <a href="#" class="nav-link" data-page="about">About Us</a><br>
+                        <a href="#" class="nav-link" data-page="bookings">Book Now</a><br>
+                        <a href="#footer" class="nav-link-scroll">Contact Us</a>
+                    </p>
+                </div>
             </div>
-            <div class="footer-contact">
-                <h4>Contact Us</h4>
-                <p>
-                    <a href="mailto:sample@gmail.com">Email: sample@gmail.com</a><br>
-                    <a href="tel:9876543210">Phone: 9876543210</a>
-                </p>
+            <div class="footer-bottom">
+                <p>© 2023 SP SPORTS ACADEMY. All Rights Reserved.</p>
             </div>
-            <div class="footer-address">
-                <h4>Our Address</h4>
-                <p>
-                    Sportybeans Porur<br>
-                    Plot A & B, Annai Velankanni Nagar Phase II,<br>
-                    4th Ave, Chennai 600125, IN
-                </p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2023 SP SPORTS ACADEMY. All Rights Reserved.</p>
         </div>
     </footer>
     
-    <!-- ======== BOOKING MODAL ======== -->
-    <div class="modal-overlay" id="booking-modal">
-        <div class="modal-container">
-            <button class="modal-close" id="modal-close-btn">×</button>
-            <h2>Booking Form</h2>
-            <form id="whatsapp-form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
+    <!-- ======== BOOKING MODAL (Bootstrap Modal) ======== -->
+    <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="bookingModalLabel">Booking Form</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="form-group">
-                    <label for="phone">Phone</label>
-                    <input type="tel" id="phone" name="phone" required>
+                <div class="modal-body">
+                    <form id="whatsapp-form">
+                        <div class="form-group mb-3">
+                            <label for="name" class="form-label required">Name</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="phone" class="form-label required">Phone</label>
+                            <input type="tel" id="phone" name="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="email" class="form-label required">Email</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="gender" class="form-label required">Gender</label>
+                            <select id="gender" name="gender" class="form-select" required>
+                                <option value="" selected disabled>--Please choose an option--</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="date" class="form-label required">Date</label>
+                            <input type="date" id="date" name="date" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn w-100">Send via WhatsApp</button>
+                    </form>
                 </div>
-                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="gender">Gender</label>
-                    <select id="gender" name="gender" required>
-                        <option value="">--Please choose an option--</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="date">Date</label>
-                    <input type="date" id="date" name="date" required>
-                </div>
-                <div class="form-group">
-                    <label for="time">Desired Time Slot</label>
-                    <input type="time" id="time" name="time" required>
-                </div>
-                <button type="submit" class="btn">Send via WhatsApp</button>
-            </form>
+            </div>
         </div>
     </div>
 
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        
-        // --- DATA ---
-        const galleryImages = [
-            'https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-            'https://images.pexels.com/photos/3621168/pexels-photo-3621168.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-            'https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-            'https://images.pexels.com/photos/2294477/pexels-photo-2294477.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-            'https://images.pexels.com/photos/47730/the-ball-stadion-football-the-pitch-47730.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-            'https://images.pexels.com/photos/863963/pexels-photo-863963.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-        ];
-        
-        const testimonials = [
-            {
-                quote: "My son absolutely loves SP Sports! The coaches are fantastic, and he has learned so much while having a blast. Highly recommended!",
-                author: "Priya S.",
-                title: "Parent"
-            },
-            {
-                quote: "A clean, safe, and incredibly fun environment for kids to burn off energy and learn new skills. We've seen a huge boost in our daughter's confidence.",
-                author: "Rajeev M.",
-                title: "Parent"
-            },
-            {
-                quote: "The basketball court facilities are top-notch. It's our go-to place for practice sessions. The booking process is simple and efficient.",
-                author: "Coach Anand",
-                title: "Basketball Coach"
-            },
-            {
-                quote: "From the multisport program to the friendly staff, everything about SP Sports Academy is designed with kids in mind. It's a fantastic place!",
-                author: "Anjali K.",
-                title: "Parent"
-            }
-        ];
-        
-        // --- PAGE NAVIGATION --- (*** THIS IS THE CORRECTED SECTION ***)
-        const navLinks = document.querySelectorAll('.nav-link');
-        const pages = document.querySelectorAll('.page');
-        const navScrollLinks = document.querySelectorAll('.nav-link-scroll');
-
-        function showPage(pageName) {
-            // Construct the ID of the page to show
-            const pageId = `page-${pageName}`;
-
-            // Hide all pages
-            pages.forEach(page => {
-                page.classList.remove('active');
-            });
-
-            // Show the target page
-            const targetPage = document.getElementById(pageId);
-            if (targetPage) {
-                targetPage.classList.add('active');
-            }
-
-            // Update the active state on the navigation links
-            navLinks.forEach(nav => {
-                nav.classList.remove('active-link');
-                if (nav.getAttribute('data-page') === pageName) {
-                    nav.classList.add('active-link');
-                }
-            });
-
-            window.scrollTo(0, 0); // Scroll to top on page change
-        }
-        
-        // Set initial active link
-        showPage('home');
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const pageName = link.getAttribute('data-page');
-                if (pageName) {
-                    showPage(pageName);
-                }
-            });
-        });
-
-        navScrollLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href');
-                document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-
-        // --- FLOATING BASKETBALLS ---
-        const basketballsContainer = document.querySelector('.basketballs');
-        if(basketballsContainer) {
-            for (let i = 0; i < 15; i++) {
-                const ball = document.createElement('div');
-                ball.className = 'ball';
-                const size = Math.random() * 80 + 20; // 20px to 100px
-                ball.style.width = `${size}px`;
-                ball.style.height = `${size}px`;
-                ball.style.left = `${Math.random() * 100}%`;
-                ball.style.animationDuration = `${Math.random() * 15 + 10}s`; // 10s to 25s
-                ball.style.animationDelay = `${Math.random() * 10}s`;
-                basketballsContainer.appendChild(ball);
-            }
-        }
-
-        // --- DYNAMIC GALLERY CAROUSEL ---
-        const galleryWrapper = document.querySelector('.gallery-wrapper');
-        const galleryPrevBtn = document.getElementById('gallery-prev');
-        const galleryNextBtn = document.getElementById('gallery-next');
-        let galleryCurrentIndex = 0;
-        let itemsPerView = window.innerWidth > 768 ? 2 : 1;
-        
-        if (galleryWrapper) {
-            galleryImages.forEach(src => {
-                galleryWrapper.innerHTML += `
-                    <div class="gallery-slide"><img src="${src}" alt="Gallery Image"></div>
-                `;
-            });
-            const totalSlides = galleryImages.length;
-            
-            function updateGallery() {
-                const offset = -galleryCurrentIndex * (100 / itemsPerView);
-                galleryWrapper.style.transform = `translateX(${offset}%)`;
-            }
-
-            galleryNextBtn.addEventListener('click', () => {
-                if (galleryCurrentIndex < totalSlides - itemsPerView) {
-                    galleryCurrentIndex++;
-                } else {
-                    galleryCurrentIndex = 0; // Loop back
-                }
-                updateGallery();
-            });
-
-            galleryPrevBtn.addEventListener('click', () => {
-                if (galleryCurrentIndex > 0) {
-                    galleryCurrentIndex--;
-                } else {
-                    galleryCurrentIndex = totalSlides - itemsPerView; // Loop to end
-                }
-                updateGallery();
-            });
-            window.addEventListener('resize', () => {
-                itemsPerView = window.innerWidth > 768 ? 2 : 1;
-                updateGallery();
-            });
-        }
-        
-        // --- DYNAMIC TESTIMONIALS CAROUSEL ---
-        const testimonialWrapper = document.querySelector('.testimonial-carousel-wrapper');
-        const testimonialNav = document.querySelector('.testimonial-nav');
-        let testimonialCurrentIndex = 0;
-
-        if (testimonialWrapper) {
-            testimonials.forEach((t, index) => {
-                testimonialWrapper.innerHTML += `
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <p>"${t.quote}"</p>
-                            <div class="testimonial-author">${t.author} <span>- ${t.title}</span></div>
-                        </div>
-                    </div>`;
-                testimonialNav.innerHTML += `<span class="dot ${index === 0 ? 'active' : ''}" data-index="${index}"></span>`;
-            });
-
-            const dots = testimonialNav.querySelectorAll('.dot');
-            
-            function updateTestimonialCarousel() {
-                testimonialWrapper.style.transform = `translateX(-${testimonialCurrentIndex * 100}%)`;
-                dots.forEach(dot => dot.classList.remove('active'));
-                dots[testimonialCurrentIndex].classList.add('active');
-            }
-
-            dots.forEach(dot => {
-                dot.addEventListener('click', () => {
-                    testimonialCurrentIndex = parseInt(dot.getAttribute('data-index'));
-                    updateTestimonialCarousel();
-                });
-            });
-            
-            // Auto-play testimonials
-            setInterval(() => {
-                testimonialCurrentIndex = (testimonialCurrentIndex + 1) % testimonials.length;
-                updateTestimonialCarousel();
-            }, 5000);
-        }
-
-        // --- BOOKING MODAL & FORM ---
-        const modalOverlay = document.getElementById('booking-modal');
-        const openModalBtn = document.getElementById('open-booking-modal');
-        const closeModalBtn = document.getElementById('modal-close-btn');
-        const form = document.getElementById('whatsapp-form');
-
-        function openModal() {
-            modalOverlay.style.display = 'flex';
-            setTimeout(() => modalOverlay.classList.add('show'), 10);
-        }
-        function closeModal() {
-            modalOverlay.classList.remove('show');
-            setTimeout(() => modalOverlay.style.display = 'none', 300);
-        }
-
-        if (openModalBtn) openModalBtn.addEventListener('click', openModal);
-        if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) closeModal();
-        });
-
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const name = document.getElementById('name').value;
-                const phone = document.getElementById('phone').value;
-                const date = document.getElementById('date').value;
-                const time = document.getElementById('time').value;
-                const whatsappNumber = '+919791011459';
-                
-                const message = `Hi, I am ${name}, I'd like to book the basketball court on ${date} at ${time}. My contact number is ${phone}.`;
-                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-                
-                window.open(whatsappUrl, '_blank');
-                closeModal();
-            });
-        }
-        
-        // --- SCROLL ANIMATION OBSERVER ---
-        const scrollElements = document.querySelectorAll('.scroll-animate');
-
-        const elementInView = (el, dividend = 1) => {
-            const elementTop = el.getBoundingClientRect().top;
-            return (
-                elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
-            );
-        };
-
-        const displayScrollElement = (element) => {
-            element.classList.add('visible');
-        };
-
-        const handleScrollAnimation = () => {
-            scrollElements.forEach((el) => {
-                if (elementInView(el, 1.25)) {
-                    displayScrollElement(el);
-                }
-            });
-        }
-
-        window.addEventListener('scroll', () => {
-            handleScrollAnimation();
-        });
-        handleScrollAnimation(); // Initial check on load
-    });
-    </script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <!-- Your Custom JS -->
+    <script src="script.js"></script>
 </body>
 </html>
