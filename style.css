@@ -367,13 +367,22 @@ footer {
 .scroll-animate.visible { opacity: 1; transform: translateY(0); }
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* --- MOBILE RESPONSIVENESS FIXES --- */
+
+/* 1. Solid background for the mobile navigation menu */
 @media (max-width: 991.98px) {
   .navbar-collapse {
-    background-color: var(--light-color); /* White background */
+    background-color: var(--light-color);
     border-radius: 15px;
     padding: 20px;
     margin-top: 10px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     border: 1px solid #eee;
+  }
+  
+  /* 2. Add space between the map section and the footer on mobile */
+  .about-page-map-section {
+    margin-bottom: 7rem; /* Adds space below the map */
   }
 }
