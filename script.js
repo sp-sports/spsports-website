@@ -2,14 +2,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // --- DATA ---
     const galleryImages = [
-        'https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        'https://images.pexels.com/photos/3621168/pexels-photo-3621168.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        'https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'img1.jpg',
+        'img2.jpg',
+        'img3.jpg',
         // --- IMPORTANT: ADD YOUR REAL IMAGE URL HERE ---
         // 'https://your-website.com/path/to/your-custom-image.jpg', 
-        'https://images.pexels.com/photos/2294477/pexels-photo-2294477.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        'https://images.pexels.com/photos/47730/the-ball-stadion-football-the-pitch-47730.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        'https://images.pexels.com/photos/863963/pexels-photo-863963.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+        'img4.jpg',
+        'img5.jpg',
+        'img6.jpg',
+        'img7.jpg',
+        'img8.jpg',
+        'img9.jpg',
+        'img10.jpg',
     ];
 
     const testimonials = [

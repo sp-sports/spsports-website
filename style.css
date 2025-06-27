@@ -367,3 +367,13 @@ footer {
 .scroll-animate.visible { opacity: 1; transform: translateY(0); }
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background-color: var(--light-color); /* White background */
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+  }
+}
