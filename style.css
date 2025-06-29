@@ -119,6 +119,13 @@ p { font-size: clamp(1rem, 1vw + 0.5rem, 1.1rem); margin-bottom: 1rem; }
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1;
+}
+
 .logo {
     font-family: var(--font-display);
     font-size: 2.4rem;
@@ -126,6 +133,16 @@ p { font-size: clamp(1rem, 1vw + 0.5rem, 1.1rem); margin-bottom: 1rem; }
     text-decoration: none;
 }
 .logo span { color: var(--secondary-color); }
+
+.logo-slogan {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  color: var(--primary-color);
+  letter-spacing: 1.5px;
+  margin-top: -8px; /* Adjusted position */
+  margin-left: 65px;
+  font-weight: bold; /* Bolded slogan */
+}
 
 .main-nav .nav-link {
     color: var(--dark-color);
@@ -264,6 +281,7 @@ details {
     padding: 20px; 
     transition: all 0.3s ease; 
     background: var(--light-color);
+    height: 100%;
 }
 details[open] { border-color: var(--secondary-color); box-shadow: 0 5px 20px rgba(0,119,182,0.1); }
 summary { 
@@ -288,9 +306,14 @@ summary:after {
 }
 details[open] summary:after { transform: rotate(45deg); }
 .details-content { padding-top: 20px; margin-top: 20px; border-top: 1px solid var(--gray-color); }
+.details-content ul { padding-left: 20px; }
+.highlight-text {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
 
 .centre-card { background: var(--gray-color); padding: 30px; border-radius: 15px; height: 100%;}
-.about-intro { margin-bottom: 4rem; }
 #page-about .section-title { margin-bottom: 2rem; }
 
 /* --- BOOKINGS PAGE --- */
@@ -314,6 +337,8 @@ details[open] summary:after { transform: rotate(45deg); }
 .booking-action { text-align: center; padding: 60px 0; }
 .booking-action .btn { font-size: 1.5rem; display: inline-flex; align-items: center; gap: 15px; }
 
+
+
 /* --- BOOKING MODAL --- */
 .modal-content { border-radius: 15px; border: none; background-color: var(--light-color); }
 .modal-header { border-bottom: none; padding: 1.5rem 1.5rem 0; }
@@ -327,6 +352,12 @@ details[open] summary:after { transform: rotate(45deg); }
     border-color: var(--primary-color); 
     box-shadow: 0 0 0 .25rem rgba(255, 103, 0, 0.25); 
 }
+/* For readonly inputs in the modal */
+input[readonly] {
+    background-color: #e9ecef;
+    opacity: 1;
+}
+
 
 /* --- FOOTER --- */
 footer { 
@@ -346,17 +377,47 @@ footer {
 }
 .footer-wave .shape-fill { fill: var(--dark-color); }
 
+/* ADD THIS NEW RULE */
+.footer-about {
+    padding-top: 0;
+}
+
 .footer-content h4 { font-size: 1.8rem; color: var(--primary-color); margin-bottom: 20px; }
 .footer-content p, .footer-content a, .footer-content li { color: #ccc; text-decoration: none; transition: color 0.3s ease; }
 .footer-content a:hover { color: var(--light-color); }
-.footer-logo { font-family: var(--font-display); font-size: 2.5rem; color: var(--primary-color) !important; display: block; margin-bottom: 1rem; }
+
+/* CHANGE THIS EXISTING RULE */
+.footer-logo { 
+    font-family: var(--font-display); 
+    font-size: 3rem; 
+    color: var(--primary-color) !important; 
+    display: block; 
+    margin-bottom: 1rem;
+    margin-top: -10px; /* ADD THIS LINE */
+    line-height: 1; /* ADD THIS LINE */
+}
 .footer-logo span { color: var(--light-color); }
 
-/* Footer Lists - Tighter spacing */
 .footer-list { list-style: none; padding-left: 0; }
-.footer-list li { margin-bottom: 0.5rem; /* Reduced spacing */ }
+.footer-list li { margin-bottom: 0.5rem; }
 
-.footer-bottom { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #444; font-size: 0.9rem; color: #aaa; }
+.footer-social .social-icon {
+  display: inline-block;
+  margin: 0 15px;
+  color: #ccc;
+  transition: all 0.3s ease;
+}
+.footer-social .social-icon:hover {
+  color: var(--primary-color);
+  transform: translateY(-5px);
+}
+.footer-social .social-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.footer-bottom { text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid #444; font-size: 0.9rem; color: #aaa; }
+
 
 /* SCROLL ANIMATIONS */
 .scroll-animate { 
@@ -368,9 +429,8 @@ footer {
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* --- MOBILE RESPONSIVENESS FIXES --- */
 
-/* 1. Solid background for the mobile navigation menu */
+/* --- MOBILE RESPONSIVENESS FIXES --- */
 @media (max-width: 991.98px) {
   .navbar-collapse {
     background-color: var(--light-color);
@@ -381,8 +441,7 @@ footer {
     border: 1px solid #eee;
   }
   
-  /* 2. Add space between the map section and the footer on mobile */
   .about-page-map-section {
-    margin-bottom: 7rem; /* Adds space below the map */
+    margin-bottom: 2rem;
   }
 }

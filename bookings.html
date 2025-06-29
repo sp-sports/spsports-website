@@ -22,10 +22,13 @@
     <!-- ======== HEADER (same on all pages) ======== -->
     <header class="main-header navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a href="index.html" class="navbar-brand logo d-flex align-items-center">
-                <img src="logo.jpg" alt="SP Sports Logo" class="me-2" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
-                SP<span> Sports</span>
-            </a>
+            <div class="logo-container">
+                <a href="index.html" class="navbar-brand logo d-flex align-items-center">
+                    <img src="logo.jpg" alt="SP Sports Logo" class="me-2" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                    SP<span> Sports</span>
+                </a>
+                <span class="logo-slogan">Nurturing Passion, Creating Winners</span>
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -49,7 +52,8 @@
             <div class="container">
                 <h2 class="section-title scroll-animate">Court <span>Details</span></h2>
                 <div class="row g-4 justify-content-center">
-                    <div class="col-lg-4 col-md-6 scroll-animate">
+                    <!-- Box 1: Information (Class changed to col-lg-3) -->
+                    <div class="col-lg-3 col-md-6 scroll-animate">
                         <div class="detail-card h-100">
                             <h3>Information</h3>
                             <ul>
@@ -60,7 +64,9 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 scroll-animate">
+
+                    <!-- Box 2: Amenities (Class changed to col-lg-3) -->
+                    <div class="col-lg-3 col-md-6 scroll-animate">
                         <div class="detail-card h-100">
                             <h3>Amenities</h3>
                             <ul>
@@ -70,17 +76,41 @@
                             </ul>
                         </div>
                     </div>
-                     <div class="col-lg-4 col-md-6 scroll-animate">
+
+                    <!-- Box 3: Training Offered (Class changed to col-lg-3) -->
+                    <div class="col-lg-3 col-md-6 scroll-animate">
                          <div class="detail-card h-100">
                             <h3>Training Offered</h3>
                             <ul>
                                 <li>Beginner & Advanced Coaching</li>
                                 <li>Team Practice Sessions</li>
-                                <li>1-on-1 Personal Training</li>
                                 <li>Kids Fitness Programs</li>
                             </ul>
                         </div>
                     </div>
+
+                    <!-- NEW Box 4: Price Details -->
+                    <div class="col-lg-3 col-md-6 scroll-animate">
+                        <div class="detail-card h-100">
+                           <h3>Price Details</h3>
+                           <ul>
+                               <li>
+                                   <strong>Weekdays</strong>
+                                   <ul class="price-sublist">
+                                       <li>Morning (6AM-4PM): ₹1,000/hr</li>
+                                       <li>Evening (4PM-10PM): ₹1,200/hr</li>
+                                   </ul>
+                               </li>
+                               <li class="mt-3">
+                                   <strong>Weekends</strong>
+                                   <ul class="price-sublist">
+                                       <li>Morning (6AM-4PM): ₹1,200/hr</li>
+                                       <li>Evening (4PM-10PM): ₹1,500/hr</li>
+                                   </ul>
+                               </li>
+                           </ul>
+                       </div>
+                   </div>
                 </div>
                 <div class="booking-action scroll-animate">
                     <button class="btn btn-whatsapp" data-bs-toggle="modal" data-bs-target="#bookingModal">
@@ -132,6 +162,13 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="footer-social text-center my-4">
+                <a href="#" class="social-icon" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.059 1.689.073 4.948.073s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"></path></svg></a>
+                <a href="#" class="social-icon" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
+                <a href="#" class="social-icon" aria-label="X (Twitter)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
+            </div>
+
             <div class="footer-bottom">
                 <p>© 2024 SP SPORTS. All Rights Reserved.</p>
             </div>
@@ -148,21 +185,68 @@
                 </div>
                 <div class="modal-body">
                     <form id="whatsapp-form" class="needs-validation" novalidate>
+                        <!-- Name and Phone remain the same -->
                         <div class="form-group mb-3">
                             <label for="name" class="form-label required">Name</label>
                             <input type="text" id="name" name="name" class="form-control" required>
-                             <div class="invalid-feedback">Please enter your name.</div>
+                            <div class="invalid-feedback">Please enter your name.</div>
                         </div>
                         <div class="form-group mb-3">
                             <label for="phone" class="form-label required">Phone</label>
                             <input type="tel" id="phone" name="phone" class="form-control" required pattern="[0-9]{10}">
                             <div class="invalid-feedback">Please enter a valid 10-digit phone number.</div>
                         </div>
-                        <div class="form-group mb-3">
-                            <label for="date" class="form-label required">Preferred Date</label>
-                            <input type="date" id="date" name="date" class="form-control" required>
-                             <div class="invalid-feedback">Please select a date.</div>
+
+                        <!-- New Pricing Fields -->
+                        <div class="row g-3">
+                            <div class="col-md-7">
+                                <div class="form-group mb-3">
+                                    <label for="date" class="form-label required">Select Date</label>
+                                    <input type="date" id="date" name="date" class="form-control" required>
+                                    <div class="invalid-feedback">Please select a date.</div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group mb-3">
+                                    <label for="startTime" class="form-label required">Start Time</label>
+                                    <select id="startTime" class="form-select" required>
+                                        <option value="" disabled selected>Select</option>
+                                        <option value="6">6:00 AM</option>
+                                        <option value="7">7:00 AM</option>
+                                        <option value="8">8:00 AM</option>
+                                        <option value="9">9:00 AM</option>
+                                        <option value="10">10:00 AM</option>
+                                        <option value="11">11:00 AM</option>
+                                        <option value="12">12:00 PM</option>
+                                        <option value="13">1:00 PM</option>
+                                        <option value="14">2:00 PM</option>
+                                        <option value="15">3:00 PM</option>
+                                        <option value="16">4:00 PM</option>
+                                        <option value="17">5:00 PM</option>
+                                        <option value="18">6:00 PM</option>
+                                        <option value="19">7:00 PM</option>
+                                        <option value="20">8:00 PM</option>
+                                        <option value="21">9:00 PM</option>
+                                    </select>
+                                    <div class="invalid-feedback">Select a start time.</div>
+                                </div>
+                            </div>
                         </div>
+
+                        <div class="form-group mb-3">
+                            <label for="hours" class="form-label">Number of Hours</label>
+                            <div class="input-group">
+                                <button class="btn btn-outline-secondary" type="button" id="hours-minus">-</button>
+                                <input type="number" id="hours" class="form-control text-center" value="1" min="1" max="16" readonly>
+                                <button class="btn btn-outline-secondary" type="button" id="hours-plus">+</button>
+                            </div>
+                        </div>
+
+                        <div class="total-amount-display my-4 text-center">
+                            <h4>Total Amount</h4>
+                            <h2 id="total-price" class="fw-bold">₹ 0</h2>
+                        </div>
+                        
                         <button type="submit" class="btn w-100">Send via WhatsApp</button>
                     </form>
                 </div>

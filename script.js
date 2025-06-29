@@ -2,18 +2,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // --- DATA ---
     const galleryImages = [
-        'img1.jpg',
-        'img2.jpg',
-        'img3.jpg',
-        // --- IMPORTANT: ADD YOUR REAL IMAGE URL HERE ---
+        'https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/3621168/pexels-photo-3621168.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
         // 'https://your-website.com/path/to/your-custom-image.jpg', 
-        'img4.jpg',
-        'img5.jpg',
-        'img6.jpg',
-        'img7.jpg',
-        'img8.jpg',
-        'img9.jpg',
-        'img10.jpg',
+        'https://images.pexels.com/photos/2294477/pexels-photo-2294477.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/47730/the-ball-stadion-football-the-pitch-47730.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/863963/pexels-photo-863963.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
     ];
 
     const testimonials = [
@@ -38,11 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Active Nav Link based on current page
-    const currentPath = window.location.pathname.split("/").pop();
+    const currentPath = window.location.pathname.split("/").pop() || "index.html";
     const navLinks = document.querySelectorAll('.main-nav .nav-link');
     navLinks.forEach(link => {
-        // Check if the link's href matches the current page's filename
-        if (link.getAttribute('href') === currentPath) {
+        const linkPath = link.getAttribute('href');
+        if (linkPath === currentPath) {
             link.classList.add('active-link');
         }
     });
@@ -119,54 +114,124 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // --- BOOKING FORM (WhatsApp) & VALIDATION ---
-   // --- BOOKING FORM (WhatsApp) & VALIDATION ---
-const bookingForm = document.getElementById('whatsapp-form');
-if (bookingForm) {
-    const bookingModalEl = document.getElementById('bookingModal');
-    // Important: Get the Bootstrap Modal instance correctly
-    const bookingModal = bootstrap.Modal.getInstance(bookingModalEl); 
-    const dateInput = document.getElementById('date');
-    if(dateInput) {
-        dateInput.min = new Date().toISOString().split("T")[0]; // Prevent past dates
-    }
-
-    bookingForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        if (bookingForm.checkValidity()) {
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const date = document.getElementById('date').value;
-            const whatsappNumber = '+917358085526'; // Your number
-            
-            const message = `Hi SP Sports! I'd like to book a session. \n\nName: ${name}\nPhone: ${phone}\nDate: ${date}`;
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-            
-            window.open(whatsappUrl, '_blank');
-            
-            // Hide the modal after submission
-            if (bookingModal) {
-                 bookingModal.hide();
+    const bookingForm = document.getElementById('whatsapp-form');
+    if (bookingForm) {
+        // --- FORM ELEMENTS ---
+        const bookingModalEl = document.getElementById('bookingModal');
+        const bookingModal = bootstrap.Modal.getInstance(bookingModalEl) || new bootstrap.Modal(bookingModalEl);
+        const dateInput = document.getElementById('date');
+        const startTimeSelect = document.getElementById('startTime');
+        const hoursInput = document.getElementById('hours');
+        const hoursPlusBtn = document.getElementById('hours-plus');
+        const hoursMinusBtn = document.getElementById('hours-minus');
+        const totalPriceDisplay = document.getElementById('total-price');
+        const nameInput = document.getElementById('name');
+        const phoneInput = document.getElementById('phone');
+    
+        // --- PRICING DATA ---
+        const prices = {
+            weekday: { morning: 1000, evening: 1200 }, // Morning before 4 PM
+            weekend: { morning: 1200, evening: 1500 }  // Evening 4 PM onwards
+        };
+        const eveningStartTime = 16; // 4:00 PM
+        const closingTime = 22; // 10:00 PM
+    
+        // --- CALCULATION LOGIC ---
+        function calculateTotal() {
+            const dateVal = dateInput.value;
+            const startTimeVal = parseInt(startTimeSelect.value, 10);
+            const hoursVal = parseInt(hoursInput.value, 10);
+    
+            if (!dateVal || isNaN(startTimeVal) || isNaN(hoursVal)) {
+                totalPriceDisplay.textContent = '₹ 0';
+                return;
             }
-
-            // Reset the form fields and remove validation classes
-            bookingForm.reset();
-            bookingForm.classList.remove('was-validated');
-
-        } else {
-            // This class adds the green/red validation styles
-            bookingForm.classList.add('was-validated');
+    
+            // Determine day type
+            const selectedDate = new Date(dateVal);
+            const dayOfWeek = selectedDate.getDay(); // 0 = Sunday, 6 = Saturday
+            const dayType = (dayOfWeek === 0 || dayOfWeek === 6) ? 'weekend' : 'weekday';
+    
+            // Determine time of day based on the first hour
+            const timeOfDay = (startTimeVal < eveningStartTime) ? 'morning' : 'evening';
+            
+            // Get hourly rate
+            const hourlyRate = prices[dayType][timeOfDay];
+    
+            // Calculate total
+            const total = hourlyRate * hoursVal;
+            totalPriceDisplay.textContent = `₹ ${total.toLocaleString('en-IN')}`;
         }
-    });
-
-    // Add an event listener for when the modal is hidden
-    bookingModalEl.addEventListener('hidden.bs.modal', function () {
-        // This is a failsafe to ensure the form is clean when the modal is closed
-        bookingForm.classList.remove('was-validated');
-        bookingForm.reset();
-    });
-}
+    
+        function updateHourConstraints() {
+            const startTimeVal = parseInt(startTimeSelect.value, 10);
+            if (isNaN(startTimeVal)) return;
+            
+            const maxHours = closingTime - startTimeVal;
+            hoursInput.max = maxHours > 0 ? maxHours : 1;
+            
+            // If current hours exceed new max, adjust it
+            if (parseInt(hoursInput.value, 10) > maxHours) {
+                hoursInput.value = maxHours > 0 ? maxHours : 1;
+            }
+            calculateTotal();
+        }
+        
+        // --- EVENT LISTENERS ---
+        dateInput.min = new Date().toISOString().split("T")[0];
+        [dateInput, startTimeSelect, hoursInput].forEach(el => el.addEventListener('change', calculateTotal));
+        startTimeSelect.addEventListener('change', updateHourConstraints);
+    
+        hoursPlusBtn.addEventListener('click', () => {
+            const max = parseInt(hoursInput.max, 10);
+            let currentVal = parseInt(hoursInput.value, 10);
+            if (currentVal < max) {
+                hoursInput.value = currentVal + 1;
+                calculateTotal();
+            }
+        });
+        
+        hoursMinusBtn.addEventListener('click', () => {
+            let currentVal = parseInt(hoursInput.value, 10);
+            if (currentVal > 1) {
+                hoursInput.value = currentVal - 1;
+                calculateTotal();
+            }
+        });
+    
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            if (bookingForm.checkValidity()) {
+                const name = nameInput.value;
+                const phone = phoneInput.value;
+                const date = dateInput.value;
+                const startTime = startTimeSelect.options[startTimeSelect.selectedIndex].text;
+                const hours = hoursInput.value;
+                const totalAmount = totalPriceDisplay.textContent;
+                
+                const whatsappNumber = '+917358085526'; // Your number
+                
+                const message = `Hi SP Sports! I'd like to book a session.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Date:* ${date}\n*Start Time:* ${startTime}\n*Hours:* ${hours}\n\n*Total Amount:* ${totalAmount}`;
+                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+                
+                window.open(whatsappUrl, '_blank');
+                if (bookingModal) bookingModal.hide();
+            } else {
+                bookingForm.classList.add('was-validated');
+            }
+        });
+    
+        if(bookingModalEl) {
+            bookingModalEl.addEventListener('hidden.bs.modal', function () {
+                bookingForm.classList.remove('was-validated');
+                bookingForm.reset();
+                totalPriceDisplay.textContent = '₹ 0'; // Reset total display
+                hoursInput.max = 16; // Reset max hours
+            });
+        }
+    }
     
     // --- INTERSECTION OBSERVER for Scroll Animations ---
     const observerOptions = { rootMargin: '0px', threshold: 0.1 };
