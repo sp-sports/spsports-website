@@ -1,4 +1,8 @@
-document.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('load', function() {
+    // Supabase client initialization
+    const SUPABASE_URL = 'https://cvuzjxefmaocofpxzxzw.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN2dXpqeGVmbWFvY29mcHh6eHp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE5Nzc3NTAsImV4cCI6MjA2NzU1Mzc1MH0.9ubyu2At5rA_mbYQigR5OS2yEcDJZ1jxkoH_Oj_LgtU';
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     
     // --- DATA ---
     const galleryImages = [
@@ -114,6 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // --- BOOKING FORM (WhatsApp) & VALIDATION ---
+
     const bookingForm = document.getElementById('whatsapp-form');
     if (bookingForm) {
         // --- FORM ELEMENTS ---
@@ -199,29 +204,56 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     
-        bookingForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
+    bookingForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (bookingForm.checkValidity()) {
+            const name = nameInput.value;
+            const phone = phoneInput.value;
+            const date = dateInput.value;
+            const startTime = startTimeSelect.options[startTimeSelect.selectedIndex].text;
+            const hours = hoursInput.value;
+            const totalAmount = totalPriceDisplay.textContent;
             
-            if (bookingForm.checkValidity()) {
-                const name = nameInput.value;
-                const phone = phoneInput.value;
-                const date = dateInput.value;
-                const startTime = startTimeSelect.options[startTimeSelect.selectedIndex].text;
-                const hours = hoursInput.value;
-                const totalAmount = totalPriceDisplay.textContent;
-                
-                const whatsappNumber = '+917358085526'; // Your number
-                
-                const message = `Hi SP Sports! I'd like to book a session.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Date:* ${date}\n*Start Time:* ${startTime}\n*Hours:* ${hours}\n\n*Total Amount:* ${totalAmount}`;
-                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-                
-                window.open(whatsappUrl, '_blank');
-                if (bookingModal) bookingModal.hide();
-            } else {
-                bookingForm.classList.add('was-validated');
+            // Send data to Google Apps Script Web App
+            try {
+                const response = await fetch('https://script.google.com/macros/s/AKfycbz99tgtJwucCm7YDvLSQ6Pcfvk5sp-iXLZiKFzhrGuimZM3zZoAAgNQzIXNvO5DN6-P/exec', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, phone, date, start_time: startTime, hours: parseInt(hours, 10), total_amount: totalAmount })
+                });
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error('Google Apps Script error:', errorData.error);
+                }
+            } catch (err) {
+                console.error('Google Apps Script exception:', err);
             }
-        });
+
+            // --- Supabase Insert ---
+            try {
+                const { data, error } = await supabase.from('bookings').insert([
+                    { name, phone, date, start_time: startTime, hours: parseInt(hours, 10), total_amount: totalAmount }
+                ]);
+                if (error) {
+                    console.error('Supabase insert error:', error);
+                }
+            } catch (err) {
+                console.error('Supabase exception:', err);
+            }
+
+            const whatsappNumber = '+917358085526'; // Your number
+            
+            const message = `Hi SP Sports! I'd like to book a session.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Date:* ${date}\n*Start Time:* ${startTime}\n*Hours:* ${hours}\n\n*Total Amount:* ${totalAmount}`;
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            
+            window.open(whatsappUrl, '_blank');
+            if (bookingModal) bookingModal.hide();
+        } else {
+            bookingForm.classList.add('was-validated');
+        }
+    });
     
         if(bookingModalEl) {
             bookingModalEl.addEventListener('hidden.bs.modal', function () {

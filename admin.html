@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard - Bookings</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.35.6/dist/umd/supabase.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2em; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 8px; }
+    th { background: #eee; }
+  </style>
+</head>
+<body>
+  <h1>Bookings Dashboard</h1>
+  <button onclick="fetchBookings()">Refresh</button>
+  <table id="bookingsTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Date</th>
+        <th>Start Time</th>
+        <th>Hours</th>
+        <th>Total Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data will be inserted here -->
+    </tbody>
+  </table>
+  <script>
+    const SUPABASE_URL = 'https://cvuzjxefmaocofpxzxzw.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN2dXpqeGVmbWFvY29mcHh6eHp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE5Nzc3NTAsImV4cCI6MjA2NzU1Mzc1MH0.9ubyu2At5rA_mbYQigR5OS2yEcDJZ1jxkoH_Oj_LgtU';
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const password = prompt("Enter admin password:");
+    if (password !== "YOUR_SECRET_PASSWORD") {
+      document.body.innerHTML = "<h2>Access Denied</h2>";
+      throw new Error("Access Denied");
+    }
+
+    async function fetchBookings() {
+      const { data, error } = await supabase.from('bookings').select('*').order('date', { ascending: false });
+      const tbody = document.querySelector('#bookingsTable tbody');
+      tbody.innerHTML = '';
+      if (error) {
+        tbody.innerHTML = `<tr><td colspan="6">Error: ${error.message}</td></tr>`;
+        return;
+      }
+      if (data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6">No bookings found.</td></tr>';
+        return;
+      }
+      data.forEach(row => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${row.name}</td>
+            <td>${row.phone}</td>
+            <td>${row.date}</td>
+            <td>${row.start_time}</td>
+            <td>${row.hours}</td>
+            <td>${row.total_amount}</td>
+          </tr>
+        `;
+      });
+    }
+
+    // Fetch bookings on page load
+    fetchBookings();
+  </script>
+</body>
+</html>
