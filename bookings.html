@@ -97,15 +97,13 @@
                                <li>
                                    <strong>Weekdays</strong>
                                    <ul class="price-sublist">
-                                       <li>Morning (6AM-4PM): ₹1,000/hr</li>
-                                       <li>Evening (4PM-10PM): ₹1,200/hr</li>
+                                       <li>Per Person: ₹100/hr (minimum 4 persons)</li>
                                    </ul>
                                </li>
                                <li class="mt-3">
                                    <strong>Weekends</strong>
                                    <ul class="price-sublist">
-                                       <li>Morning (6AM-4PM): ₹1,200/hr</li>
-                                       <li>Evening (4PM-10PM): ₹1,500/hr</li>
+                                       <li>Per Person: ₹150/hr (minimum 4 persons)</li>
                                    </ul>
                                </li>
                            </ul>
@@ -125,7 +123,7 @@
     </main>
 
     <!-- Shared Footer -->
-    <footer id="footer">
+         <footer id="footer">
         <div class="footer-wave">
             <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
                 <path d="M0,50 C150,150 350,-50 500,50 C650,150 850,-50 1000,50 C1150,150 1350,-50 1500,50 L1500,150 L0,150 Z" class="shape-fill"></path>
@@ -162,7 +160,7 @@
                     </ul>
                 </div>
             </div>
-
+            
             <div class="footer-social text-center my-4">
                 <a href="#" class="social-icon" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.059 1.689.073 4.948.073s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"></path></svg></a>
                 <a href="#" class="social-icon" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
@@ -173,6 +171,7 @@
                 <p>© 2024 SP SPORTS. All Rights Reserved.</p>
             </div>
         </div>
+
     </footer>
     
     <!-- Shared Booking Modal -->
@@ -197,7 +196,7 @@
                             <div class="invalid-feedback">Please enter a valid 10-digit phone number.</div>
                         </div>
 
-                        <!-- New Pricing Fields -->
+                        <!-- Pricing Fields -->
                         <div class="row g-3">
                             <div class="col-md-7">
                                 <div class="form-group mb-3">
@@ -241,6 +240,18 @@
                                 <button class="btn btn-outline-secondary" type="button" id="hours-plus">+</button>
                             </div>
                         </div>
+                        
+                        <!-- =========== ADDED: Number of Persons Input =========== -->
+                        <div class="form-group mb-3">
+                            <label for="persons" class="form-label required">Number of Persons (Min. 4)</label>
+                            <div class="input-group">
+                                <button class="btn btn-outline-secondary" type="button" id="persons-minus">-</button>
+                                <input type="number" id="persons" name="persons" class="form-control text-center" value="4" min="4" max="20" readonly required>
+                                <button class="btn btn-outline-secondary" type="button" id="persons-plus">+</button>
+                            </div>
+                            <div class="invalid-feedback">A minimum of 4 persons is required.</div>
+                        </div>
+                        <!-- ======================================================= -->
 
                         <div class="total-amount-display my-4 text-center">
                             <h4>Total Amount</h4>
