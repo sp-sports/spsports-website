@@ -265,16 +265,27 @@ window.addEventListener('load', function() {
                     console.error('Supabase exception:', err);
                 }
 
-                const whatsappNumber = '+917358085526';
+                const whatsappNumber = '919841326626';
                 // Use the original formatted text for the user-facing WhatsApp message
                 const message = `Hi SP Sports! I'd like to book a session.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Date:* ${date}\n*Start Time:* ${startTime}\n*Hours:* ${hours}\n*Number of Persons:* ${persons}\n\n*Estimated Total:* ${totalAmountText}`;
-                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-                
+
+                // Detect if user is on mobile or desktop
+                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+                // Build correct WhatsApp URL
+                const whatsappUrl = isMobile
+                    ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+                    : `https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
+
+                console.log(whatsappUrl);
+
+                // Open WhatsApp link
                 window.open(whatsappUrl, '_blank');
                 if (bookingModal) bookingModal.hide();
-            } else {
-                bookingForm.classList.add('was-validated');
-            }
+                } else {
+                    bookingForm.classList.add('was-validated');
+                }
+
         });
         // ====================================================================================
     
