@@ -280,7 +280,7 @@ window.addEventListener('load', function() {
                 console.log(whatsappUrl);
 
                 // Open WhatsApp link
-                window.open(whatsappUrl, '_blank');
+                window.location.href = whatsappUrl;
                 if (bookingModal) bookingModal.hide();
                 } else {
                     bookingForm.classList.add('was-validated');
